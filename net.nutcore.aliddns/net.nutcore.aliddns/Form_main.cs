@@ -374,6 +374,22 @@ namespace net.nutcore.aliddns
                 {
                     domainIP.Text = localIP.Text; //更新窗体数据
                     textBox_log.AppendText(System.DateTime.Now.ToString() + " " + "域名绑定IP更新成功！" + "\r\n");
+                    if (checkBox_ngrok.Checked == true)
+                    {
+                        //button_ngrok.Enabled = false;
+                        //cfg.SaveAppSetting("ngrokauto", "On");
+                        //检测ngrok.exe是否存在
+                        if (ngrok.IsExists())
+                        {
+                            textBox_log.AppendText(System.DateTime.Now.ToString() + " " + "IP地址变化，Ngrok功能重启！本机浏览器打开：http://127.0.0.1:4040 查看运行状态。" + "\r\n");
+                            ngrok.Stop();
+                            ngrok.Start();
+                        }
+                        //else
+                        //{
+                            //textBox_log.AppendText(System.DateTime.Now.ToString() + " " + "Ngrok功能启用，但当前目录没有发现ngrok.exe，请往官网下载自行编译：https://ngrok.com/download" + "\r\n");
+                        //}
+                    }
                 }
                 textBox_recordId.Text = response.RecordId;
             }
