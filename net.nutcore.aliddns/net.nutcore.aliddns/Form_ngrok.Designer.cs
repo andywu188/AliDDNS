@@ -35,9 +35,15 @@
             this.textBox_serverAddr = new System.Windows.Forms.TextBox();
             this.label_NgrokDomain = new System.Windows.Forms.Label();
             this.groupBox_Url = new System.Windows.Forms.GroupBox();
+            this.textBox_lanPort3 = new System.Windows.Forms.TextBox();
+            this.textBox_remotePort3 = new System.Windows.Forms.TextBox();
+            this.label_tunnel3 = new System.Windows.Forms.Label();
+            this.label_tunnel2 = new System.Windows.Forms.Label();
+            this.label_tunnel1 = new System.Windows.Forms.Label();
             this.textBox_lanPort2 = new System.Windows.Forms.TextBox();
             this.textBox_remotePort2 = new System.Windows.Forms.TextBox();
             this.textBox_lanPort1 = new System.Windows.Forms.TextBox();
+            this.textBox_remotePort1 = new System.Windows.Forms.TextBox();
             this.label_lanport = new System.Windows.Forms.Label();
             this.label_remoteport = new System.Windows.Forms.Label();
             this.label_tunnels = new System.Windows.Forms.Label();
@@ -47,12 +53,8 @@
             this.label_subDomain = new System.Windows.Forms.Label();
             this.button_cancel = new System.Windows.Forms.Button();
             this.button_save = new System.Windows.Forms.Button();
-            this.textBox_remotePort1 = new System.Windows.Forms.TextBox();
-            this.label_tunnel1 = new System.Windows.Forms.Label();
-            this.label_tunnel2 = new System.Windows.Forms.Label();
-            this.label_tunnel3 = new System.Windows.Forms.Label();
-            this.textBox_remotePort3 = new System.Windows.Forms.TextBox();
-            this.textBox_lanPort3 = new System.Windows.Forms.TextBox();
+            this.label_lanHttps = new System.Windows.Forms.Label();
+            this.textBox_lanHttps = new System.Windows.Forms.TextBox();
             this.groupBox_AuthToken.SuspendLayout();
             this.groupBox_Ngrokserver.SuspendLayout();
             this.groupBox_Url.SuspendLayout();
@@ -116,8 +118,10 @@
             this.groupBox_Url.Controls.Add(this.label_lanport);
             this.groupBox_Url.Controls.Add(this.label_remoteport);
             this.groupBox_Url.Controls.Add(this.label_tunnels);
+            this.groupBox_Url.Controls.Add(this.textBox_lanHttps);
             this.groupBox_Url.Controls.Add(this.textBox_lanHttp);
             this.groupBox_Url.Controls.Add(this.textBox_subDomain);
+            this.groupBox_Url.Controls.Add(this.label_lanHttps);
             this.groupBox_Url.Controls.Add(this.label_lanHttp);
             this.groupBox_Url.Controls.Add(this.label_subDomain);
             this.groupBox_Url.Location = new System.Drawing.Point(6, 123);
@@ -126,6 +130,47 @@
             this.groupBox_Url.TabIndex = 2;
             this.groupBox_Url.TabStop = false;
             this.groupBox_Url.Text = "内网端Ngrok";
+            // 
+            // textBox_lanPort3
+            // 
+            this.textBox_lanPort3.Location = new System.Drawing.Point(191, 140);
+            this.textBox_lanPort3.Name = "textBox_lanPort3";
+            this.textBox_lanPort3.Size = new System.Drawing.Size(50, 21);
+            this.textBox_lanPort3.TabIndex = 19;
+            // 
+            // textBox_remotePort3
+            // 
+            this.textBox_remotePort3.Location = new System.Drawing.Point(96, 140);
+            this.textBox_remotePort3.Name = "textBox_remotePort3";
+            this.textBox_remotePort3.Size = new System.Drawing.Size(50, 21);
+            this.textBox_remotePort3.TabIndex = 18;
+            // 
+            // label_tunnel3
+            // 
+            this.label_tunnel3.AutoSize = true;
+            this.label_tunnel3.Location = new System.Drawing.Point(17, 142);
+            this.label_tunnel3.Name = "label_tunnel3";
+            this.label_tunnel3.Size = new System.Drawing.Size(53, 12);
+            this.label_tunnel3.TabIndex = 17;
+            this.label_tunnel3.Text = "Tunnel3:";
+            // 
+            // label_tunnel2
+            // 
+            this.label_tunnel2.AutoSize = true;
+            this.label_tunnel2.Location = new System.Drawing.Point(17, 115);
+            this.label_tunnel2.Name = "label_tunnel2";
+            this.label_tunnel2.Size = new System.Drawing.Size(53, 12);
+            this.label_tunnel2.TabIndex = 16;
+            this.label_tunnel2.Text = "Tunnel2:";
+            // 
+            // label_tunnel1
+            // 
+            this.label_tunnel1.AutoSize = true;
+            this.label_tunnel1.Location = new System.Drawing.Point(17, 88);
+            this.label_tunnel1.Name = "label_tunnel1";
+            this.label_tunnel1.Size = new System.Drawing.Size(53, 12);
+            this.label_tunnel1.TabIndex = 15;
+            this.label_tunnel1.Text = "Tunnel1:";
             // 
             // textBox_lanPort2
             // 
@@ -147,6 +192,13 @@
             this.textBox_lanPort1.Name = "textBox_lanPort1";
             this.textBox_lanPort1.Size = new System.Drawing.Size(50, 21);
             this.textBox_lanPort1.TabIndex = 11;
+            // 
+            // textBox_remotePort1
+            // 
+            this.textBox_remotePort1.Location = new System.Drawing.Point(96, 85);
+            this.textBox_remotePort1.Name = "textBox_remotePort1";
+            this.textBox_remotePort1.Size = new System.Drawing.Size(50, 21);
+            this.textBox_remotePort1.TabIndex = 10;
             // 
             // label_lanport
             // 
@@ -194,9 +246,9 @@
             this.label_lanHttp.AutoSize = true;
             this.label_lanHttp.Location = new System.Drawing.Point(80, 18);
             this.label_lanHttp.Name = "label_lanHttp";
-            this.label_lanHttp.Size = new System.Drawing.Size(89, 12);
+            this.label_lanHttp.Size = new System.Drawing.Size(77, 12);
             this.label_lanHttp.TabIndex = 1;
-            this.label_lanHttp.Text = "http/s服务端口";
+            this.label_lanHttp.Text = "http服务端口";
             // 
             // label_subDomain
             // 
@@ -227,53 +279,21 @@
             this.button_save.UseVisualStyleBackColor = true;
             this.button_save.Click += new System.EventHandler(this.button_save_Click);
             // 
-            // textBox_remotePort1
+            // label_lanHttps
             // 
-            this.textBox_remotePort1.Location = new System.Drawing.Point(96, 85);
-            this.textBox_remotePort1.Name = "textBox_remotePort1";
-            this.textBox_remotePort1.Size = new System.Drawing.Size(50, 21);
-            this.textBox_remotePort1.TabIndex = 10;
+            this.label_lanHttps.AutoSize = true;
+            this.label_lanHttps.Location = new System.Drawing.Point(172, 18);
+            this.label_lanHttps.Name = "label_lanHttps";
+            this.label_lanHttps.Size = new System.Drawing.Size(83, 12);
+            this.label_lanHttps.TabIndex = 1;
+            this.label_lanHttps.Text = "https服务端口";
             // 
-            // label_tunnel1
+            // textBox_lanHttps
             // 
-            this.label_tunnel1.AutoSize = true;
-            this.label_tunnel1.Location = new System.Drawing.Point(17, 88);
-            this.label_tunnel1.Name = "label_tunnel1";
-            this.label_tunnel1.Size = new System.Drawing.Size(53, 12);
-            this.label_tunnel1.TabIndex = 15;
-            this.label_tunnel1.Text = "Tunnel1:";
-            // 
-            // label_tunnel2
-            // 
-            this.label_tunnel2.AutoSize = true;
-            this.label_tunnel2.Location = new System.Drawing.Point(17, 115);
-            this.label_tunnel2.Name = "label_tunnel2";
-            this.label_tunnel2.Size = new System.Drawing.Size(53, 12);
-            this.label_tunnel2.TabIndex = 16;
-            this.label_tunnel2.Text = "Tunnel2:";
-            // 
-            // label_tunnel3
-            // 
-            this.label_tunnel3.AutoSize = true;
-            this.label_tunnel3.Location = new System.Drawing.Point(17, 142);
-            this.label_tunnel3.Name = "label_tunnel3";
-            this.label_tunnel3.Size = new System.Drawing.Size(53, 12);
-            this.label_tunnel3.TabIndex = 17;
-            this.label_tunnel3.Text = "Tunnel3:";
-            // 
-            // textBox_remotePort3
-            // 
-            this.textBox_remotePort3.Location = new System.Drawing.Point(96, 140);
-            this.textBox_remotePort3.Name = "textBox_remotePort3";
-            this.textBox_remotePort3.Size = new System.Drawing.Size(50, 21);
-            this.textBox_remotePort3.TabIndex = 18;
-            // 
-            // textBox_lanPort3
-            // 
-            this.textBox_lanPort3.Location = new System.Drawing.Point(191, 140);
-            this.textBox_lanPort3.Name = "textBox_lanPort3";
-            this.textBox_lanPort3.Size = new System.Drawing.Size(50, 21);
-            this.textBox_lanPort3.TabIndex = 19;
+            this.textBox_lanHttps.Location = new System.Drawing.Point(191, 37);
+            this.textBox_lanHttps.Name = "textBox_lanHttps";
+            this.textBox_lanHttps.Size = new System.Drawing.Size(50, 21);
+            this.textBox_lanHttps.TabIndex = 4;
             // 
             // Form_ngrok
             // 
@@ -325,5 +345,7 @@
         private System.Windows.Forms.Label label_tunnel3;
         private System.Windows.Forms.Label label_tunnel2;
         private System.Windows.Forms.Label label_tunnel1;
+        private System.Windows.Forms.TextBox textBox_lanHttps;
+        private System.Windows.Forms.Label label_lanHttps;
     }
 }

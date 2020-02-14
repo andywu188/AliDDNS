@@ -29,6 +29,10 @@ namespace net.nutcore.aliddns
             int.TryParse(textBox_lanHttp.Text, out lanhttp);
             textBox_lanHttp.Text = lanhttp.ToString();
 
+            var lanhttps = 443;
+            int.TryParse(textBox_lanHttps.Text, out lanhttps);
+            textBox_lanHttps.Text = lanhttp.ToString();
+
             var subdomain = textBox_subDomain.Text.ToString();
 
             var remoteport1 = 2221;
@@ -52,7 +56,7 @@ namespace net.nutcore.aliddns
             int.TryParse(textBox_lanPort3.Text, out lanport3);
             textBox_lanPort3.Text = lanport3.ToString();
 
-            ngrok.Save(token, server_addr, lanhttp, subdomain, remoteport1, lanport1, remoteport2, lanport2, remoteport3, lanport3, true, true);
+            ngrok.Save(token, server_addr, subdomain, lanhttp, lanhttps, remoteport1, lanport1, remoteport2, lanport2, remoteport3, lanport3, true, true);
             this.Close();
             this.Dispose();
         }
@@ -70,8 +74,9 @@ namespace net.nutcore.aliddns
                 var config = ngrok.Load();
                 textBox_AuthToken.Text = config.authtoken;
                 textBox_serverAddr.Text = config.server_addr;
-                textBox_subDomain.Text = config.tunnels.website.subdomain.ToString();
-                textBox_lanHttp.Text = config.tunnels.website.proto.http.ToString();
+                textBox_subDomain.Text = config.tunnels.website_http.subdomain.ToString();
+                textBox_lanHttp.Text = config.tunnels.website_http.proto.http.ToString();
+                textBox_lanHttps.Text = config.tunnels.website_https.proto.https.ToString();
                 textBox_remotePort1.Text = config.tunnels.tcp1.remote_port.ToString();
                 textBox_lanPort1.Text = config.tunnels.tcp1.proto.tcp.ToString();
                 textBox_remotePort2.Text = config.tunnels.tcp2.remote_port.ToString();
