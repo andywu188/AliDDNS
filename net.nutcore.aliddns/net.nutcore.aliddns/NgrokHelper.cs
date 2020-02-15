@@ -37,7 +37,6 @@ namespace net.nutcore.aliddns
         public class Tunnel
         {
             public Protocol website_http { get; set; }
-            public Protocol website_https { get; set; }
             public Protocol tcp1 { get; set; }
             public Protocol tcp2 { get; set; }
             public Protocol tcp3 { get; set; }
@@ -93,15 +92,7 @@ namespace net.nutcore.aliddns
                             subdomain = "www",
                             proto = new Proto
                             {
-                                http = 80
-                            }
-
-                        },
-                        website_https = new Protocol
-                        {
-                            subdomain = "www",
-                            proto = new Proto
-                            {
+                                http = 80,
                                 https = 443
                             }
                         },
@@ -176,8 +167,7 @@ namespace net.nutcore.aliddns
             config.server_addr = server_addr;
             config.tunnels.website_http.subdomain = subdomain;
             config.tunnels.website_http.proto.http = http;
-            config.tunnels.website_https.subdomain = subdomain;
-            config.tunnels.website_https.proto.https = https;
+            config.tunnels.website_http.proto.https = https;
             config.tunnels.tcp1.remote_port = remoteport1;
             config.tunnels.tcp1.proto.tcp = lanport1;
             config.tunnels.tcp2.remote_port = remoteport2;
@@ -206,21 +196,14 @@ namespace net.nutcore.aliddns
                 case 1:
                     exec.Arguments += "website_http";
                     break;
-
                 case 2:
-                    exec.Arguments += "website_http website_https";
+                    exec.Arguments += "website_http tcp1";
                     break;
-
                 case 3:
-                    exec.Arguments += "website_http website_https tcp1";
+                    exec.Arguments += "website_http tcp1 tcp2";
                     break;
-
-                case 4:
-                    exec.Arguments += "website_http website_https tcp1 tcp2";
-                    break;
-
                 default:
-                    exec.Arguments += "website_http website_https tcp1 tcp2 tcp3";
+                    exec.Arguments += "website_http tcp1 tcp2 tcp3";
                     break;
             }
 
