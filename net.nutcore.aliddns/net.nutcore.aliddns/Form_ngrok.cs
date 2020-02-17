@@ -83,7 +83,7 @@ namespace net.nutcore.aliddns
                 textBox_serverAddr.Text = config.server_addr;
                 textBox_subDomain.Text = config.tunnels.website_http.subdomain.ToString();
                 textBox_lanHttp.Text = config.tunnels.website_http.proto.http.ToString();
-                textBox_lanHttps.Text = config.tunnels.website_https.proto.https.ToString();
+                textBox_lanHttps.Text = config.tunnels.website_http.proto.https.ToString();
                 textBox_remotePort1.Text = config.tunnels.tcp1.remote_port.ToString();
                 textBox_lanPort1.Text = config.tunnels.tcp1.proto.tcp.ToString();
                 textBox_remotePort2.Text = config.tunnels.tcp2.remote_port.ToString();
