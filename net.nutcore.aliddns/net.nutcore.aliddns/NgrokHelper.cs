@@ -238,7 +238,7 @@ namespace net.nutcore.aliddns
                     break;
 
                 default:
-                    exec.Arguments += "website_http website_https tcp1 tcp2 tcp3 tcp5";
+                    exec.Arguments += "website_http website_https tcp1 tcp2 tcp3 tcp4";
                     break;
             }
 
