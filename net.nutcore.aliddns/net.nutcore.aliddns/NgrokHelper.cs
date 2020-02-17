@@ -13,10 +13,10 @@ namespace net.nutcore.aliddns
     internal class NgrokHelper
     {
         private static readonly string NgrokExecutable = "ngrok.exe";
-        private static readonly string NgrokYaml = "ngrok.cfg";
+        private static readonly string NgrokYamlConfig = "ngrok.cfg";
         public static readonly string CurrentDirectory = Path.GetDirectoryName(Application.ExecutablePath);
         public static readonly string FileNgrokExecutable = Path.Combine(CurrentDirectory, NgrokExecutable);
-        public static readonly string FileConfig = Path.Combine(CurrentDirectory, NgrokYaml);
+        public static readonly string FileConfig = Path.Combine(CurrentDirectory, NgrokYamlConfig);
         private static string LocalHost = "localhost:4040";
 
         public class Config
@@ -29,6 +29,7 @@ namespace net.nutcore.aliddns
             public string log_format { get; set; }
             public string log { get; set; }
             public string web_addr { get; set; }
+            public bool trust_host_root_certs { get; set; }
             public bool run_website { get; set; }
             public bool run_tcp { get; set; }
             public Tunnel tunnels { get; set; }
@@ -41,6 +42,7 @@ namespace net.nutcore.aliddns
             public Protocol tcp1 { get; set; }
             public Protocol tcp2 { get; set; }
             public Protocol tcp3 { get; set; }
+            public Protocol tcp4 { get; set; }
         }
 
         public class Protocol
@@ -84,13 +86,14 @@ namespace net.nutcore.aliddns
                     log_format = "logfmt",
                     log = "ngrok.log",
                     web_addr = LocalHost,
+                    trust_host_root_certs = false,
                     run_website = true,
                     run_tcp = true,
                     tunnels = new Tunnel
                     {
                         website_http = new Protocol
                         {
-                            subdomain = "www",
+                            subdomain = "subdomain",
                             proto = new Proto
                             {
                                 http = 80
@@ -99,7 +102,7 @@ namespace net.nutcore.aliddns
                         },
                         website_https = new Protocol
                         {
-                            subdomain = "www",
+                            subdomain = "subdomain",
                             proto = new Proto
                             {
                                 https = 443
@@ -107,7 +110,7 @@ namespace net.nutcore.aliddns
                         },
                         tcp1 = new Protocol
                         {
-                            remote_port = 2221,
+                            remote_port = 10001,
                             proto = new Proto
                             {
                                 tcp = 21
@@ -115,7 +118,7 @@ namespace net.nutcore.aliddns
                         },
                         tcp2 = new Protocol
                         {
-                            remote_port = 2222,
+                            remote_port = 10002,
                             proto = new Proto
                             {
                                 tcp = 22
@@ -123,10 +126,18 @@ namespace net.nutcore.aliddns
                         },
                         tcp3 = new Protocol
                         {
-                            remote_port = 33890,
+                            remote_port = 10003,
                             proto = new Proto
                             {
                                 tcp = 3389
+                            }
+                        },
+                        tcp4 = new Protocol
+                        {
+                            remote_port = 10099,
+                            proto = new Proto
+                            {
+                                tcp = 9000
                             }
                         }
                     }
@@ -169,7 +180,7 @@ namespace net.nutcore.aliddns
             return config;
         }
 
-        public void Save(string token, string server_addr, string subdomain, int http, int https, int remoteport1, int lanport1, int remoteport2, int lanport2, int remoteport3, int lanport3, bool run_website, bool run_tcp)
+        public void Save(string token, string server_addr, string subdomain, int http, int https, int remoteport1, int lanport1, int remoteport2, int lanport2, int remoteport3, int lanport3, int remoteport4, int lanport4, bool root_certs, bool run_website, bool run_tcp)
         {
             var config = Load();
             config.authtoken = token;
@@ -184,6 +195,9 @@ namespace net.nutcore.aliddns
             config.tunnels.tcp2.proto.tcp = lanport2;
             config.tunnels.tcp3.remote_port = remoteport3;
             config.tunnels.tcp3.proto.tcp = lanport3;
+            config.tunnels.tcp4.remote_port = remoteport4;
+            config.tunnels.tcp4.proto.tcp = lanport4;
+            config.trust_host_root_certs = root_certs;
             config.run_website = run_website;
             config.run_tcp = run_tcp;
 
@@ -199,7 +213,7 @@ namespace net.nutcore.aliddns
             exec.FileName = NgrokExecutable;
             exec.CreateNoWindow = true;
             exec.UseShellExecute = false;
-            exec.Arguments = $"-config \"{NgrokYaml}\" start ";
+            exec.Arguments = $"-config \"{NgrokYamlConfig}\" start ";
 
             switch (code)
             {
@@ -219,8 +233,12 @@ namespace net.nutcore.aliddns
                     exec.Arguments += "website_http website_https tcp1 tcp2";
                     break;
 
-                default:
+                case 5:
                     exec.Arguments += "website_http website_https tcp1 tcp2 tcp3";
+                    break;
+
+                default:
+                    exec.Arguments += "website_http website_https tcp1 tcp2 tcp3 tcp5";
                     break;
             }
 

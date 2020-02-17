@@ -56,7 +56,14 @@ namespace net.nutcore.aliddns
             int.TryParse(textBox_lanPort3.Text, out lanport3);
             textBox_lanPort3.Text = lanport3.ToString();
 
-            ngrok.Save(token, server_addr, subdomain, lanhttp, lanhttps, remoteport1, lanport1, remoteport2, lanport2, remoteport3, lanport3, true, true);
+            var remoteport4 = 10099;
+            int.TryParse(textBox_remotePort4.Text, out remoteport4);
+            textBox_remotePort4.Text = remoteport4.ToString();
+            var lanport4 = 9000;
+            int.TryParse(textBox_lanPort4.Text, out lanport4);
+            textBox_lanPort4.Text = lanport4.ToString();
+
+            ngrok.Save(token, server_addr, subdomain, lanhttp, lanhttps, remoteport1, lanport1, remoteport2, lanport2, remoteport3, lanport3, remoteport4, lanport4, false, true, true);
             this.Close();
             this.Dispose();
         }
@@ -83,10 +90,12 @@ namespace net.nutcore.aliddns
                 textBox_lanPort2.Text = config.tunnels.tcp2.proto.tcp.ToString();
                 textBox_remotePort3.Text = config.tunnels.tcp3.remote_port.ToString();
                 textBox_lanPort3.Text = config.tunnels.tcp3.proto.tcp.ToString();
+                textBox_remotePort4.Text = config.tunnels.tcp4.remote_port.ToString();
+                textBox_lanPort4.Text = config.tunnels.tcp4.proto.tcp.ToString();
             }
-            catch (Exception error)
+            catch (Exception)
             {
-                MessageBox.Show("设置文件ngrok.cfg读取出错！错误信息：\n" + error);
+                MessageBox.Show("配置文件ngrok.cfg读取出错！请修改文件内容或者格式，也可以删除错误文件自动生成新文件。","警告",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 this.Dispose();
             }
 
