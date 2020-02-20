@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfigHelper.cs" />
+    <Compile Include="YamlHelper.cs" />
     <Compile Include="EncryptHelper.cs" />
     <Compile Include="Form_About.cs">
       <SubType>Form</SubType>

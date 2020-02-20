@@ -28,6 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            "http",
+            "www",
+            "http",
+            "8081",
+            "80"}, -1);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_ngrok));
             this.groupBox_AuthToken = new System.Windows.Forms.GroupBox();
             this.textBox_AuthToken = new System.Windows.Forms.TextBox();
@@ -35,6 +41,9 @@
             this.textBox_serverAddr = new System.Windows.Forms.TextBox();
             this.label_NgrokDomain = new System.Windows.Forms.Label();
             this.groupBox_Url = new System.Windows.Forms.GroupBox();
+            this.textBox_lanPort4 = new System.Windows.Forms.TextBox();
+            this.textBox_remotePort4 = new System.Windows.Forms.TextBox();
+            this.label_tunnel4 = new System.Windows.Forms.Label();
             this.textBox_lanPort3 = new System.Windows.Forms.TextBox();
             this.textBox_remotePort3 = new System.Windows.Forms.TextBox();
             this.label_tunnel3 = new System.Windows.Forms.Label();
@@ -55,9 +64,12 @@
             this.label_subDomain = new System.Windows.Forms.Label();
             this.button_cancel = new System.Windows.Forms.Button();
             this.button_save = new System.Windows.Forms.Button();
-            this.textBox_lanPort4 = new System.Windows.Forms.TextBox();
-            this.textBox_remotePort4 = new System.Windows.Forms.TextBox();
-            this.label_tunnel4 = new System.Windows.Forms.Label();
+            this.listView_setup = new System.Windows.Forms.ListView();
+            this.columnHeader_proto = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader_remoteport = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader_lanport = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader_subdomain = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader_symbol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox_AuthToken.SuspendLayout();
             this.groupBox_Ngrokserver.SuspendLayout();
             this.groupBox_Url.SuspendLayout();
@@ -136,6 +148,29 @@
             this.groupBox_Url.TabIndex = 2;
             this.groupBox_Url.TabStop = false;
             this.groupBox_Url.Text = "内网端Ngrok";
+            // 
+            // textBox_lanPort4
+            // 
+            this.textBox_lanPort4.Location = new System.Drawing.Point(171, 166);
+            this.textBox_lanPort4.Name = "textBox_lanPort4";
+            this.textBox_lanPort4.Size = new System.Drawing.Size(50, 21);
+            this.textBox_lanPort4.TabIndex = 20;
+            // 
+            // textBox_remotePort4
+            // 
+            this.textBox_remotePort4.Location = new System.Drawing.Point(87, 166);
+            this.textBox_remotePort4.Name = "textBox_remotePort4";
+            this.textBox_remotePort4.Size = new System.Drawing.Size(50, 21);
+            this.textBox_remotePort4.TabIndex = 19;
+            // 
+            // label_tunnel4
+            // 
+            this.label_tunnel4.AutoSize = true;
+            this.label_tunnel4.Location = new System.Drawing.Point(17, 169);
+            this.label_tunnel4.Name = "label_tunnel4";
+            this.label_tunnel4.Size = new System.Drawing.Size(53, 12);
+            this.label_tunnel4.TabIndex = 18;
+            this.label_tunnel4.Text = "Tunnel4:";
             // 
             // textBox_lanPort3
             // 
@@ -301,34 +336,53 @@
             this.button_save.UseVisualStyleBackColor = true;
             this.button_save.Click += new System.EventHandler(this.button_save_Click);
             // 
-            // textBox_lanPort4
+            // listView_setup
             // 
-            this.textBox_lanPort4.Location = new System.Drawing.Point(171, 166);
-            this.textBox_lanPort4.Name = "textBox_lanPort4";
-            this.textBox_lanPort4.Size = new System.Drawing.Size(50, 21);
-            this.textBox_lanPort4.TabIndex = 20;
+            this.listView_setup.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader_symbol,
+            this.columnHeader_subdomain,
+            this.columnHeader_proto,
+            this.columnHeader_remoteport,
+            this.columnHeader_lanport});
+            this.listView_setup.GridLines = true;
+            this.listView_setup.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
+            this.listView_setup.Location = new System.Drawing.Point(254, 188);
+            this.listView_setup.Name = "listView_setup";
+            this.listView_setup.Size = new System.Drawing.Size(247, 151);
+            this.listView_setup.TabIndex = 5;
+            this.listView_setup.UseCompatibleStateImageBehavior = false;
+            this.listView_setup.View = System.Windows.Forms.View.Details;
             // 
-            // textBox_remotePort4
+            // columnHeader_proto
             // 
-            this.textBox_remotePort4.Location = new System.Drawing.Point(87, 166);
-            this.textBox_remotePort4.Name = "textBox_remotePort4";
-            this.textBox_remotePort4.Size = new System.Drawing.Size(50, 21);
-            this.textBox_remotePort4.TabIndex = 19;
+            this.columnHeader_proto.Text = "proto";
+            this.columnHeader_proto.Width = 43;
             // 
-            // label_tunnel4
+            // columnHeader_remoteport
             // 
-            this.label_tunnel4.AutoSize = true;
-            this.label_tunnel4.Location = new System.Drawing.Point(17, 169);
-            this.label_tunnel4.Name = "label_tunnel4";
-            this.label_tunnel4.Size = new System.Drawing.Size(53, 12);
-            this.label_tunnel4.TabIndex = 18;
-            this.label_tunnel4.Text = "Tunnel4:";
+            this.columnHeader_remoteport.Text = "remoteport";
+            // 
+            // columnHeader_lanport
+            // 
+            this.columnHeader_lanport.Text = "Lanport";
+            // 
+            // columnHeader_subdomain
+            // 
+            this.columnHeader_subdomain.Text = "subdomain";
+            this.columnHeader_subdomain.Width = 69;
+            // 
+            // columnHeader_symbol
+            // 
+            this.columnHeader_symbol.Text = "symbol";
+            this.columnHeader_symbol.Width = 50;
             // 
             // Form_ngrok
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(254, 351);
+            this.ClientSize = new System.Drawing.Size(513, 351);
+            this.Controls.Add(this.listView_setup);
             this.Controls.Add(this.button_save);
             this.Controls.Add(this.button_cancel);
             this.Controls.Add(this.groupBox_Url);
@@ -383,5 +437,11 @@
         private System.Windows.Forms.TextBox textBox_lanPort4;
         private System.Windows.Forms.TextBox textBox_remotePort4;
         private System.Windows.Forms.Label label_tunnel4;
+        private System.Windows.Forms.ListView listView_setup;
+        private System.Windows.Forms.ColumnHeader columnHeader_symbol;
+        private System.Windows.Forms.ColumnHeader columnHeader_subdomain;
+        private System.Windows.Forms.ColumnHeader columnHeader_proto;
+        private System.Windows.Forms.ColumnHeader columnHeader_remoteport;
+        private System.Windows.Forms.ColumnHeader columnHeader_lanport;
     }
 }
